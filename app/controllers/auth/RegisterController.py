@@ -16,7 +16,7 @@ class RegisterController(Controller):
             {
                 "email": "required",
                 "name": "required",
-                "password": "required|strong|confirmed",
+                "password": "required|confirmed",
             }
         )
 
