@@ -7,17 +7,14 @@
     <meta name="csrf-token" content="{{ csrf_token }}">
     <title>{% block title %}Masonite 4{% endblock %}</title>
     <link rel="shortcut icon" href="/favicon.ico">
-    <link
-      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+    <link href="/assets/css/app.css" rel="stylesheet">
     {% block head %}
     <!-- <link rel="stylesheet" href="/assets/css/app.css"> -->
     {% endblock %}
   </head>
   <body>
     <!-- This example requires Tailwind CSS v2.0+ -->
-<header class="bg-slate-600">
+<header class="bg-teal-900">
   <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
     <div class="w-full py-6 flex items-center justify-between border-b border-indigo-500 lg:border-none">
       <div class="flex items-center">

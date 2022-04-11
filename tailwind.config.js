@@ -5,11 +5,11 @@ module.exports = {
     "./templates/**/*.{html,js}",
   ],
   theme: {
-    colors:{
-      transparent: 'transparent',
-      current: 'currentColor',
-      slate: colors.slate,
-    },
+    // colors:{
+    //   transparent: 'transparent',
+    //   current: 'currentColor',
+    //   slate: colors.slate,
+    // },
   },
   plugins: [],
 }
