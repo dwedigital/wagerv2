@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+    
+    {% block content %}
+
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="flex flex-col align-middle w-full">
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg w-full md:w-6/12 my-5 mx-auto">
+        <div class="px-4 py-5 sm:px-6">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">Wager Details</h3>
+          <p class="mt-1 max-w-2xl text-sm text-gray-500">Detail breakdown of wager</p>
+        </div>
+        <div class="border-t-2 border-gray-300 px-4 py-5 sm:p-0">
+          <dl class="sm:divide-y sm:divide-gray-200">
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">Name</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{wager.name}}</dd>
+            </div>
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">Created</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{wager.created_at.strftime('%d-%m-%Y')}}</dd>
+            </div>
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">Proposer</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{wager.proposer}}</dd>
+            </div>
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">Challenger</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{wager.challenger}}</dd>
+              </div>
+              @if wager.referee
+              <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">Referee</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{wager.challenger}}</dd>
+              </div>
+              @endif
+              @if wager.reward
+              <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">Reward Details</dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{wager.reward.description}}</dd>
+              </div>
+    
+              @if wager.reward.amount
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">Wager Amount</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{wager.reward.amount}}</dd>
+            </div>
+            @endif
+            @endif
+            <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-medium text-gray-500">Details</dt>
+              <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{{wager.description}}</dd>
+            </div>
+    
+          </dl>
+        </div>
+      </div>
+</div>
+  
+
+
+
+    {% endblock %}

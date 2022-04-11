@@ -11,14 +11,21 @@ class WagerController(Controller):
         else:
             #TODO add wager view & form
             print(request.user())
-            return "hello"
+            return view.render("wager.home")
 
     def store(self, request: Request, response: Response):
         #TODO add wager store
         return "hello"
-        pass
+        
 
-    def wager(self, request: Request, response: Response):
+    def wager(self, view: View, request: Request, response: Response):
         #TODO add wager wager
-        return Wager.find(request.param("id"))
-        pass
+        wager= Wager.find(request.param("id"))
+        if(wager):
+            return view.render("wager.single",{
+                "wager": wager
+            })
+        else:
+            return response.redirect("/wager")
+            
+        

@@ -15,6 +15,7 @@ class MigrationForWagersTable(Migration):
             table.text("challenger")
             table.text("proposer")
             table.text("referee").nullable()
+            table.text("status").default("pending")
 
             table.timestamps()
 
