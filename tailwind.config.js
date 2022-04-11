@@ -6,7 +6,9 @@ module.exports = {
     "./templates/**/*.html",
   ],
   theme: {
-    extend:[],
+    colors:{
+      slate: colors.slate,
+    },
   },
   plugins: [],
 }

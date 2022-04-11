@@ -14,5 +14,5 @@ class UserTableSeeder(Seeder):
                 "email": "user@example.com",
                 "password": Hash.make("secret"),
                 "phone": "+123456789",
-            }
+            },
         )

@@ -9,7 +9,7 @@ class MigrationForWagersTable(Migration):
         Run the migrations.
         """
         with self.schema.create("wagers") as table:
-            table.increments("wager_id")
+            table.increments("id")
             table.text("name")
             table.long_text("description")
             table.integer("challenger_id")
