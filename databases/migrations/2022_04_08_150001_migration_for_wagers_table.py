@@ -12,9 +12,9 @@ class MigrationForWagersTable(Migration):
             table.increments("id")
             table.text("name")
             table.long_text("description")
-            table.integer("challenger_id")
-            table.integer("proposer_id")
-            table.integer("referee_id").nullable()
+            table.text("challenger")
+            table.text("proposer")
+            table.text("referee").nullable()
 
             table.timestamps()
 

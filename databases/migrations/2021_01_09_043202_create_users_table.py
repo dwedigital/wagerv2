@@ -8,7 +8,7 @@ class CreateUsersTable(Migration):
             table.increments("id")
             table.string("name")
             table.string("email").unique()
-            table.string("password")
+            table.string("password").nullable()
             table.string("second_password").nullable()
             table.string("remember_token").nullable()
             table.string("phone").nullable()

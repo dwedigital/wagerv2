@@ -10,13 +10,13 @@ class WagerTableSeeder(Seeder):
         Wager.create({
             "name": "Wager 1",
             "description": "Wager 1 description",
-            "challenger_id": 1,
-            "proposer_id": 2,
-            "referee_id": 3,
+            "challenger": "user@example.com",
+            "proposer": "test2@test.com",
+            "referee": "test3@test.com",
         })
         Wager.create({
             "name": "Wager 2",
             "description": "Wager 1 description",
-            "challenger_id": 1,
-            "proposer_id": 2,
+            "challenger": "user@example.com",
+            "proposer": "test2@test.com",
         })

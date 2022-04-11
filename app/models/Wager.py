@@ -6,7 +6,7 @@ from masoniteorm.relationships import has_one
 
 class Wager(Model):
     """Wager Model"""
-    __fillable__ = ["name", "description", "challenger_id", "proposer_id", "referee_id"]
+    __fillable__ = ["name", "description", "challenger", "proposer", "referee"]
 
     @has_one('id','id')
     def reward(self):
@@ -18,19 +18,33 @@ class Wager(Model):
         from app.models.Outcome import Outcome
         return Outcome
 
-    has_one('id','id')
-    def challenger(self):
-        from app.models.User import User
-        return User
-    
-    has_one('id','id')
-    def proposer(self):
-        from app.models.User import User
-        return User
 
-    has_one('id','id')
-    def referee(self):
+
+    def get_challenger(self):
         from app.models.User import User
-        return User
+        user = User.where('email', self.challenger).first()
+        if(user):
+            return user
+        else:
+            return None
+    
+
+    def get_proposer(self):
+        from app.models.User import User
+        user= User.where('email', self.proposer).first()
+        if(user):
+            return user
+        else:
+            return None
+
+
+
+    def get_referee(self):
+        from app.models.User import User
+        user =  User.where('email', self.referee).first()
+        if(user):
+            return user
+        else:
+            return None
 
     
