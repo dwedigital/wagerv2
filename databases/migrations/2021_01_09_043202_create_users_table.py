@@ -6,7 +6,7 @@ class CreateUsersTable(Migration):
         """Run the migrations."""
         with self.schema.create("users") as table:
             table.increments("id")
-            table.string("name")
+            table.string("name").nullable()
             table.string("email").unique()
             table.string("password").nullable()
             table.string("second_password").nullable()

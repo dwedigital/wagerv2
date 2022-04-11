@@ -6,7 +6,7 @@ from masoniteorm.relationships import has_one
 
 class Wager(Model):
     """Wager Model"""
-    __fillable__ = ["name", "description", "challenger", "proposer", "referee"]
+    __fillable__ = ["name", "description", "challenger", "proposer", "referee", "expiry_date", "status"]
 
     @has_one('id','id')
     def reward(self):
