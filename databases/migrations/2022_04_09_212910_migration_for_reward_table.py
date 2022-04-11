@@ -13,7 +13,8 @@ class MigrationForRewardTable(Migration):
             table.increments("id")
             table.unsigned_integer("wager_id")
             table.long_text("description")
-            table.integer("amount").nullable()
+            table.integer("amount", nullable=True)
+            table.text("reward_type")
 
             table.foreign("wager_id").references("id").on("wagers").on_delete("cascade") 
             table.timestamps()
