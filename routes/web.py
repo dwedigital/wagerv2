@@ -3,8 +3,13 @@ from masonite.authentication import Auth
 
 ROUTES = [
     Route.get("/", "WelcomeController@show").name('home'),
-    Route.get("/wager", "WagerController@show").name('wager'),
-    Route.post("/wager", "WagerController@store").name('wager.store'),
-    Route.get("/wager/@id", "WagerController@wager").name('wager.wager'),
+    Route.group(
+        [
+            Route.get("", "WagerController@index").name('index'),
+            Route.get("/@id", "WagerController@wager").name('single'),
+            Route.get("/create", "WagerController@create").name('create'),
+            Route.post("/create", "WagerController@store").name('store'),
+        ], prefix="/wager", middleware=['auth'], name="wager"
+    ),
     ]
 ROUTES+= Auth.routes()
