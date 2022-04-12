@@ -68,6 +68,16 @@ class WagerController(Controller):
                         "email": request.input("referee"),
                     }
                 )
+
+        if(request.input("reward-description") != ""):
+            reward = Reward.create(
+                {
+                    "description": request.input("reward-description"),
+                    "wager_id": wager.id,
+                    "reward_type": request.input("reward-type").lower(),
+                    "amount": request.input("reward-amount") if request.input("reward-amount") != "" else None,
+                }
+            )
         # Email the challenger with a new challenge email
         # TODO add wager token as varaible to email fo accept or reject
         mail.mailable(NewChallenge(wager).to(request.input("challenger"))).send()

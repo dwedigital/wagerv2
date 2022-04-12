@@ -13,12 +13,12 @@ class Wager(Model):
         super().__init__()
         self.token = str(uuid.uuid4())
 
-    @has_one('id','id')
+    @has_one('wager_id','id')
     def reward(self):
         from app.models.Reward import Reward
         return Reward
 
-    @has_one('id','id')
+    @has_one('wager_id','id')
     def outcome(self):
         from app.models.Outcome import Outcome
         return Outcome
