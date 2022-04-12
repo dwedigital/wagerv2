@@ -26,7 +26,7 @@ class WagerController(Controller):
 
     def store(self, request: Request, response: Response, mail: Mail):
         # Create the wager from the form data
-        Wager.create(
+        wager = Wager.create(
             {
                 "name": request.input("name"),
                 "description": request.input("description"),
@@ -45,7 +45,7 @@ class WagerController(Controller):
             )
         # Email the challenger with a new challenge email
         # TODO add wager token as varaible to email fo accept or reject
-        mail.mailable(NewChallenge().to(request.input("challenger"))).send()
+        mail.mailable(NewChallenge(wager).to(request.input("challenger"))).send()
         return "hello"
 
     def accept(self, view: View, request: Request, response: Response):
