@@ -27,13 +27,18 @@
           <img class="h-16 w-auto" src="/images/wager-white.png" alt="">
         </a>
         <div class="hidden ml-10 space-x-8 lg:block">
-          <a href="#" class="text-base font-medium text-white hover:text-indigo-50"> Solutions </a>
+          @if not auth()
+          <a href="#" class="text-base font-medium text-white hover:text-indigo-50"> About </a>
 
-          <a href="#" class="text-base font-medium text-white hover:text-indigo-50"> Pricing </a>
+          <a href="#" class="text-base font-medium text-white hover:text-indigo-50"> FAQs </a>
 
-          <a href="#" class="text-base font-medium text-white hover:text-indigo-50"> Docs </a>
+          <a href="#" class="text-base font-medium text-white hover:text-indigo-50"> Contact </a>
 
-          <a href="#" class="text-base font-medium text-white hover:text-indigo-50"> Company </a>
+          @else
+          <a href="{{route('wagerindex')}}" class="text-base font-medium text-white hover:text-indigo-50"> Dashboard </a>
+          <a href="#" class="text-base font-medium text-white hover:text-indigo-50">Account</a>
+
+          @endif
         </div>
       </div>
 

@@ -82,6 +82,7 @@
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Challenger</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Referee</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Expiry Date</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Type</th>
                   <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
                     <span class="sr-only">Edit</span>
                   </th>
@@ -101,7 +102,15 @@
                         @endif
     
                   </td>
+                  
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{w.expiry_date.strftime('%d-%m-%Y')}}</td>
+                    @if w.challenger == auth().email
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><span class="px-3 bg-sky-500 hover:bg-sky-600 text-white text-sm font-medium rounded-full">Challenger</span></td>
+                    @elif w.referee == auth().email
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><span class="px-3 bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium rounded-full">Referee</span></td>
+                    @else
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><span class="px-3 bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-medium rounded-full">Proposer</span></td>
+                    @endif
                   <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                     <a href="{{route('wagersingle',{'id':w.id})}}" class="text-indigo-600 hover:text-indigo-900">View Details<span class="sr-only"></span></a>
                   </td>
@@ -136,20 +145,18 @@ const myChart = new Chart(ctx, {
             label: 'Wager Statuses',
             data: Object.values(dataset),
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(94,126,194,0.3)',
+                'rgba(0,172,227,0.3)',
+                'rgba(0,214,227,0.3)',
+                'rgba(112,250,203,0.3)',
+
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                'rgba(94,126,194,1.0)',
+                'rgba(0,172,227,1.0)',
+                'rgba(0,214,227,1.0)',
+                'rgba(112,250,203,1.0)',
+
             ],
             borderWidth: 1
         }]
@@ -165,20 +172,16 @@ const rewardChart = new Chart(rewardChartArea, {
             label: '# of wagers',
             data: Object.values(rewardData),
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(94,194,170,0.4)',
+                'rgba(69,169,162,0.4)',
+                'rgba(55,144,150,0.4)',
+                'rgba(50,119,133,0.4)'
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                'rgba(94,194,170,1.0)',
+                'rgba(69,169,162,1.0)',
+                'rgba(55,144,150,1.0)',
+                'rgba(50,119,133,1.0)'
             ],
             borderWidth: 1
         }]
