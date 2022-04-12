@@ -20,7 +20,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="pb-5 border-b-2 border-gray-200 my-8 px-32">
     <h2 class="text-xl font-semibold leading-6 text-gray-900">Create Wager</h2>
-    <p class="mt-2 max-w-4xl font-light text-sm text-gray-500">Workcation is a property rental website. Etiam ullamcorper massa viverra consequat, consectetur id nulla tempus. Fringilla egestas justo massa purus sagittis malesuada.</p>
+    <p class="mt-2 max-w-4xl font-light text-sm text-gray-500">Wager your friends and choose to invite someone as a referee to decide the outcome. If no referee is chosen the outcome will be down to you and the challenger.</p>
   </div>
   
 <div class="flex flex-col w-9/12 mx-auto">
@@ -41,21 +41,21 @@
                 <div class="col-span-3 sm:col-span-2">
                   <label for="name" class="block text-sm font-medium text-gray-700"> Name </label>
                   <div class="mt-1 flex rounded-md shadow-sm">
-                    <input type="text" name="name" id="name"  class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300" placeholder="wager title">
+                    <input type="text" name="name" id="name"  class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300" placeholder="wager title" required>
                   </div>
                 </div>
 
                 <div class="col-span-3 sm:col-span-2">
                     <label for="proposer" class="block text-sm font-medium text-gray-700"> Proposer </label>
                     <div class="mt-1 flex rounded-md shadow-sm">
-                      <input type="email" name="proposer" readonly value="{{auth().email}}" id="proposer" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300" placeholder="wager title">
+                      <input type="email" name="proposer" readonly value="{{auth().email}}" id="proposer" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300" placeholder="wager title" required>
                     </div>
                   </div>
 
                   <div class="col-span-3 sm:col-span-2">
                     <label for="challenger" class="block text-sm font-medium text-gray-700"> Challenger </label>
                     <div class="mt-1 flex rounded-md shadow-sm">
-                      <input type="email" name="challenger" id="challenger" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300" placeholder="challenger's email">
+                      <input type="email" name="challenger" id="challenger" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300" placeholder="challenger's email" required>
                     </div>
                   </div>
 
@@ -69,7 +69,7 @@
                   <div class="col-span-3 sm:col-span-2">
                     <label for="expiry-date" class="block text-sm font-medium text-gray-700"> Expiry Date </label>
                     <div class="mt-1 flex rounded-md shadow-sm">
-                      <input type="date" name="expiry-date" id="expiry-date" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300" placeholder="referee's email">
+                      <input type="date" name="expiry-date" id="expiry-date" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300" placeholder="referee's email" required>
                     </div>
                   </div>
               </div>
@@ -107,8 +107,8 @@
       <div class="md:col-span-1">
         <div class="px-4 sm:px-0 flex justify-between">
           <div>
-            <h3 class="text-lg font-medium leading-6 text-gray-900">Reward Information</h3>
-            <p class="mt-1 text-sm text-gray-600">Add an optional reward</p>
+            <h3 class="text-lg font-medium leading-6 text-gray-900">Reward</h3>
+            <p class="mt-1 text-sm text-gray-600">Add an optional reward & details</p>
           </div>
           <div class="ml-8">
             <svg lns="http://www.w3.org/2000/svg" class="md:h-10 md:w-10 w-7 h-7 fill-slate-500 hover:fill-indigo-600 cursor-pointer" viewBox="0 0 20 20" fill="currentColor" id="show-reward">
@@ -176,6 +176,9 @@
 
 <script>
   $(document).ready(function(){
+        $('#expiry-date').val(new Date().toISOString().split('T')[0]);
+
+    
     $("#show-reward").click(function(){
       $("#reward").toggle("blind",{
         duration: 500,
