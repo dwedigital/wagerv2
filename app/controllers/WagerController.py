@@ -7,11 +7,19 @@ from app.models.Wager import Wager
 from app.models.Reward import Reward
 from masonite.mail import Mail
 from app.mailables.NewChallenge import NewChallenge
+from masonite.authentication import Auth
 
 
 class WagerController(Controller):
-    def index(self, view: View):
-        return view.render("wager.home")
+    def index(self, view: View, auth: Auth):
+        wagers = Wager.where(
+            lambda query: (
+                query.where("proposer", auth.user().email)
+                .or_where("challenger", auth.user().email)
+                .or_where("referee", auth.user().email)
+            )
+        ).get()
+        return view.render("wager.home", {"wagers": wagers})
 
     def wager(self, view: View, request: Request, response: Response):
         wager = Wager.find(request.param("id"))
