@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 
+{%block head%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{%endblock%}
+
 {% block content %}
 <div class="flex flex-col lg:w-9/12 w-full mx-auto mt-16 md:px-0 px-8 sm:px-4">
-    <!-- This example requires Tailwind CSS v2.0+ -->
+    <!-- PAGE HEADING -->
     <div class="md:flex md:items-center md:justify-between mb-10">
         <div class="flex-1 min-w-0">
           <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Dashboard</h2>
@@ -11,15 +15,53 @@
           <a href="{{route('wagercreate')}}"><button type="button" class="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create Wager</button></a>
         </div>
       </div>
-    
 
-  
+
+      <!-- STATS -->
+<div>
+  <h3 class="text-lg leading-6 font-medium text-gray-900">Wager Stats</h3>
+  <dl class="mt-5 grid grid-cols-1 md:grid-cols-4 gap-6 ">
+    <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+      <dt class="text-sm font-medium text-gray-500 truncate">No. of Wagers</dt>
+      <dd class="mt-1 text-3xl font-semibold text-gray-900">{{analysis.total()}}</dd>
+    </div>
+
+    <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+      <dt class="text-sm font-medium text-gray-500 truncate">Won</dt>
+      <dd class="mt-1 text-3xl font-semibold text-gray-900">{{analysis.won}}</dd>
+    </div>
+
+    <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+      <dt class="text-sm font-medium text-gray-500 truncate">Lost</dt>
+      <dd class="mt-1 text-3xl font-semibold text-gray-900">{{analysis.lost}}</dd>
+    </div>
+    @if analysis.win_percentage
+    <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
+      <dt class="text-sm font-medium text-gray-500 truncate">Win Percentage</dt>
+      <dd class="mt-1 text-3xl font-semibold text-gray-900">{{analysis.win_percentage}}%</dd>
+    </div>
+    @endif
+  </dl>
+</div>
+
+      
+      
+      
+<!-- CHARTS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+      <div>
+        <canvas id="statusChart" width="200px" height="200px"></canvas>
+      </div>
+      <div>
+        <canvas id="statusChart" width="200px" height="200px"></canvas>
+      </div>
+    </div>
     @if wagers
-  <!-- This example requires Tailwind CSS v2.0+ -->
+  <!-- WAGER TABLE -->
 <div class="px-4 sm:px-4 lg:px-8 mb-8">
     <div class="sm:flex sm:items-center">
       <div class="sm:flex-auto">
-        <h1 class="text-xl font-semibold text-gray-900">You Wagers</h1>
+        <h1 class="text-xl font-semibold text-gray-900">Your Wagers</h1>
         <p class="mt-2 text-sm text-gray-700">Below is a list of all your wagers you have created, are a challanger on or referee</p>
       </div>
 
@@ -76,4 +118,38 @@
     <p>You have no wagers currently <a href="{{route('wagercreate')}}">create a wager</a></p>
     @endif
 </div>
+
+<script>
+    const dataset = {{analysis.status() | tojson | safe}};
+    
+
+    const ctx = document.getElementById('statusChart');
+const myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: Object.keys(dataset),
+        datasets: [{
+            label: 'Wager Statuses',
+            data: Object.values(dataset),
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+});
+</script>
 {% endblock %}

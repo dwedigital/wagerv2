@@ -10,7 +10,7 @@ from app.mailables.NewChallenge import NewChallenge
 from masonite.authentication import Auth
 from datetime import datetime
 import pendulum
-
+from app.models.WagerAnalytics import WagerAnalytics
 
 class WagerController(Controller):
     def index(self, view: View, auth: Auth):
@@ -21,7 +21,13 @@ class WagerController(Controller):
                 .or_where("referee", auth.user().email)
             )
         ).get()
-        return view.render("wager.home", {"wagers": wagers})
+
+        analytics =WagerAnalytics(wagers, auth.user())
+        print(analytics.status())
+
+
+
+        return view.render("wager.home", {"wagers": wagers, "analysis": analytics})
 
     def wager(self, view: View, request: Request, response: Response):
         wager = Wager.find(request.param("id"))
@@ -44,7 +50,7 @@ class WagerController(Controller):
                 "proposer": request.input("proposer"),
                 "challenger": request.input("challenger"),
                 "referee": request.input("referee"),
-                "expiry_date":pendulum.parse(request.input("expiry-date")).to_datetime_string(),
+                "expiry_date": pendulum.parse(request.input("expiry-date")).to_datetime_string(),
             }
         )
         # If the user does not exist then create one with just their email so they can sign up
@@ -55,7 +61,7 @@ class WagerController(Controller):
                 }
             )
 
-        if(request.input("referee") != ""):
+        if request.input("referee") != "":
             if User.where("email", request.input("referee")).first() == None:
                 User.create(
                     {
