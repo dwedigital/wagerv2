@@ -44,21 +44,22 @@ class WagerController(Controller):
                 }
             )
         # Email the challenger with a new challenge email
+        # TODO add wager token as varaible to email fo accept or reject
         mail.mailable(NewChallenge().to(request.input("challenger"))).send()
         return "hello"
 
     def accept(self, view: View, request: Request, response: Response):
-        #TODO check wager is not rejected or accepted
+        # TODO check wager is not rejected or accepted
         wager = Wager.where("token", request.param("token")).first()
         wager.update({"status": "accepted"})
-        #TODO send email to proposer saying they have accepted the wager
-        #TODO fix view to have some meaningful feedback
+        # TODO send email to proposer saying they have accepted the wager
+        # TODO fix view to have some meaningful feedback
         return view.render("wager.accept")
 
     def decline(self, view: View, request: Request, response: Response):
-        #TODO check wager is not rejected or accepted
+        # TODO check wager is not rejected or accepted
         wager = Wager.where("token", request.param("token")).first()
         wager.update({"status": "declined"})
-        #TODO send email to proposer saying they have rejected the wager
-        #TODO fix view to have some meaningful feedback
+        # TODO send email to proposer saying they have rejected the wager
+        # TODO fix view to have some meaningful feedback
         return view.render("wager.reject")
