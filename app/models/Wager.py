@@ -7,6 +7,7 @@ from masoniteorm.relationships import has_one
 class Wager(Model):
     """Wager Model"""
     __fillable__ = ["name", "description", "challenger", "proposer", "referee", "expiry_date", "status"]
+    __dates__ = ['expiry_date']
 
     def __init__(self):
         super().__init__()

@@ -8,6 +8,8 @@ from app.models.Reward import Reward
 from masonite.mail import Mail
 from app.mailables.NewChallenge import NewChallenge
 from masonite.authentication import Auth
+from datetime import datetime
+import pendulum
 
 
 class WagerController(Controller):
@@ -34,6 +36,7 @@ class WagerController(Controller):
 
     def store(self, request: Request, response: Response, mail: Mail):
         # Create the wager from the form data
+        print(request.input("expiry-date"))
         wager = Wager.create(
             {
                 "name": request.input("name"),
@@ -41,7 +44,7 @@ class WagerController(Controller):
                 "proposer": request.input("proposer"),
                 "challenger": request.input("challenger"),
                 "referee": request.input("referee"),
-                "expiry_date": request.input("expiry-date"),
+                "expiry_date":pendulum.parse(request.input("expiry-date")).to_datetime_string(),
             }
         )
         # If the user does not exist then create one with just their email so they can sign up
@@ -51,6 +54,14 @@ class WagerController(Controller):
                     "email": request.input("challenger"),
                 }
             )
+
+        if(request.input("referee") != ""):
+            if User.where("email", request.input("referee")).first() == None:
+                User.create(
+                    {
+                        "email": request.input("referee"),
+                    }
+                )
         # Email the challenger with a new challenge email
         # TODO add wager token as varaible to email fo accept or reject
         mail.mailable(NewChallenge(wager).to(request.input("challenger"))).send()
