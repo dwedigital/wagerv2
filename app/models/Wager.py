@@ -1,5 +1,5 @@
 """ User Model """
-
+import uuid
 from masoniteorm.models import Model
 from masoniteorm.relationships import has_one
 
@@ -7,6 +7,10 @@ from masoniteorm.relationships import has_one
 class Wager(Model):
     """Wager Model"""
     __fillable__ = ["name", "description", "challenger", "proposer", "referee", "expiry_date", "status"]
+
+    def __init__(self):
+        super().__init__()
+        self.token = str(uuid.uuid4())
 
     @has_one('id','id')
     def reward(self):
@@ -47,4 +51,5 @@ class Wager(Model):
         else:
             return None
 
-    
+
+        

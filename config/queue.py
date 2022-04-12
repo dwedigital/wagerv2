@@ -23,7 +23,7 @@ DRIVERS = {
         "queue": "masonite4",
     },
     "async": {
-        "blocking": True,
+        "blocking": False,
         "callback": "handle",
         "mode": "threading",
         "workers": 1,

@@ -16,6 +16,7 @@ class MigrationForWagersTable(Migration):
             table.text("proposer")
             table.text("referee").nullable()
             table.datetime('expiry_date')
+            table.string("token")
             table.text("status").default("pending")
 
             table.timestamps()
