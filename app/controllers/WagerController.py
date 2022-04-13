@@ -12,20 +12,12 @@ from datetime import datetime
 import pendulum
 from app.models.WagerAnalytics import WagerAnalytics
 
+
 class WagerController(Controller):
     def index(self, view: View, auth: Auth):
-        wagers = Wager.where(
-            lambda query: (
-                query.where("proposer", auth.user().email)
-                .or_where("challenger", auth.user().email)
-                .or_where("referee", auth.user().email)
-            )
-        ).get()
-
-        analytics =WagerAnalytics(wagers, auth.user())
-        print(analytics.status())
-
-
+        user = auth.user()
+        wagers = user.wagers()
+        analytics = WagerAnalytics(wagers, auth.user())
 
         return view.render("wager.home", {"wagers": wagers, "analysis": analytics})
 
@@ -69,13 +61,15 @@ class WagerController(Controller):
                     }
                 )
 
-        if(request.input("reward-description") != ""):
+        if request.input("reward-description") != "":
             reward = Reward.create(
                 {
                     "description": request.input("reward-description"),
                     "wager_id": wager.id,
                     "reward_type": request.input("reward-type").lower(),
-                    "amount": request.input("reward-amount") if request.input("reward-amount") != "" else None,
+                    "amount": request.input("reward-amount")
+                    if request.input("reward-amount") != ""
+                    else None,
                 }
             )
         # Email the challenger with a new challenge email

@@ -11,3 +11,14 @@ class User(Model, SoftDeletesMixin, Authenticates):
     __fillable__ = ["name", "email", "password"]
     __hidden__ = ["password"]
     __auth__ = "email"
+
+    def wagers(self):
+        from app.models.Wager import Wager
+
+        return Wager.where(
+            lambda query: (
+                query.where("challenger", self.email)
+                .or_where("proposer", self.email)
+                .or_where("referee", self.email)
+            )
+        ).get()
