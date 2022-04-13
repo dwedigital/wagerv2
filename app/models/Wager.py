@@ -4,6 +4,7 @@ from masoniteorm.models import Model
 from masoniteorm.relationships import has_one
 import pendulum
 
+
 class Wager(Model):
     """Wager Model"""
 

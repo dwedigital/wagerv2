@@ -7,6 +7,7 @@ class NewChallenge(Mailable):
     def __init__(self, wager: Wager):
         super().__init__()
         self.wager = wager
+
     def build(self):
         return (
             self.subject("You've Been Challenged to a Wager")
