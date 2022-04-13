@@ -3,7 +3,6 @@
 from masoniteorm.migrations import Migration
 
 
-
 class MigrationForRewardTable(Migration):
     def up(self):
         """

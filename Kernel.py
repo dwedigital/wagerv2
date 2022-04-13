@@ -1,20 +1,16 @@
-from masonite.foundation import response_handler
-from masonite.storage import StorageCapsule
 from masonite.auth import Sign
-from masonite.environment import LoadEnvironment
-from masonite.utils.structures import load
-from masonite.utils.location import base_path
-from masonite.middleware import (
-    SessionMiddleware,
-    EncryptCookies,
-    LoadUserMiddleware,
-    MaintenanceModeMiddleware,
-)
-from masonite.routes import Route
-from masonite.configuration.Configuration import Configuration
 from masonite.configuration import config
+from masonite.configuration.Configuration import Configuration
+from masonite.environment import LoadEnvironment
+from masonite.foundation import response_handler
+from masonite.middleware import (EncryptCookies, LoadUserMiddleware,
+                                 MaintenanceModeMiddleware, SessionMiddleware)
+from masonite.routes import Route
+from masonite.storage import StorageCapsule
+from masonite.utils.location import base_path
+from masonite.utils.structures import load
 
-from app.middlewares import VerifyCsrfToken, AuthenticationMiddleware
+from app.middlewares import AuthenticationMiddleware, VerifyCsrfToken
 
 
 class Kernel:

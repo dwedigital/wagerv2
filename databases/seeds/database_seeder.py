@@ -1,10 +1,10 @@
 """Base Database Seeder Module."""
 from masoniteorm.seeds import Seeder
 
+from .outcome_table_seeder import OutcomeTableSeeder
+from .reward_table_seeder import RewardTableSeeder
 from .user_table_seeder import UserTableSeeder
 from .wager_table_seeder import WagerTableSeeder
-from .reward_table_seeder import RewardTableSeeder
-from .outcome_table_seeder import OutcomeTableSeeder
 
 
 class DatabaseSeeder(Seeder):

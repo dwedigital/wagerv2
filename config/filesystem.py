@@ -1,7 +1,6 @@
 from masonite.environment import env
 from masonite.utils.location import base_path
 
-
 DISKS = {
     "default": "local",
     "local": {

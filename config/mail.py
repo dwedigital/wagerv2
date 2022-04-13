@@ -1,6 +1,5 @@
 from masonite.environment import env
 
-
 FROM_EMAIL = env("MAIL_FROM", "no-reply@masonite.com")
 
 DRIVERS = {

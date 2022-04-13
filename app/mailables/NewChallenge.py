@@ -1,5 +1,6 @@
-from masonite.mail import Mailable
 from masonite.configuration import config
+from masonite.mail import Mailable
+
 from app.models.Wager import Wager
 
 

@@ -1,5 +1,7 @@
 from masoniteorm import Factory
+
 from app.models.User import User
+
 
 def user_factory(faker):
     return {

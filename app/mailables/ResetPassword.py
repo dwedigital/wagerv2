@@ -1,5 +1,5 @@
-from masonite.mail import Mailable
 from masonite.configuration import config
+from masonite.mail import Mailable
 
 
 class ResetPassword(Mailable):

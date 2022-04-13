@@ -1,8 +1,8 @@
 """User Model."""
-from masoniteorm.models import Model
-from masoniteorm.scopes import SoftDeletesMixin
 from masonite.authentication import Authenticates
+from masoniteorm.models import Model
 from masoniteorm.relationships import belongs_to_many
+from masoniteorm.scopes import SoftDeletesMixin
 
 
 class User(Model, SoftDeletesMixin, Authenticates):

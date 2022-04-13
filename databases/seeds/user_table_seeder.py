@@ -1,6 +1,6 @@
 """UserTableSeeder Seeder."""
-from masoniteorm.seeds import Seeder
 from masonite.facades import Hash
+from masoniteorm.seeds import Seeder
 
 from app.models.User import User
 

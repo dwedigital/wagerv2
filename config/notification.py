@@ -1,6 +1,5 @@
 from masonite.environment import env
 
-
 DRIVERS = {
     "slack": {
         "token": env("SLACK_TOKEN", ""),  # used for API mode

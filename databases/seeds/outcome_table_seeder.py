@@ -1,6 +1,7 @@
 """OutcomeTableSeeder Seeder."""
 
 from masoniteorm.seeds import Seeder
+
 from app.models.Outcome import Outcome
 
 

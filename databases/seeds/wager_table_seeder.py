@@ -1,8 +1,9 @@
 """WagerTableSeeder Seeder."""
 
-from masoniteorm.seeds import Seeder
-from app.models.Wager import Wager
 import pendulum
+from masoniteorm.seeds import Seeder
+
+from app.models.Wager import Wager
 
 
 class WagerTableSeeder(Seeder):

@@ -1,7 +1,9 @@
 """RewardTableSeeder Seeder."""
 
 from masoniteorm.seeds import Seeder
+
 from app.models.Reward import Reward
+
 
 class RewardTableSeeder(Seeder):
     def run(self):

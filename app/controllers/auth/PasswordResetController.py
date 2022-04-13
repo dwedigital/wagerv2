@@ -1,9 +1,10 @@
+from masonite.authentication import Auth
 from masonite.controllers import Controller
-from masonite.views import View
+from masonite.facades import Mail
 from masonite.request import Request
 from masonite.response import Response
-from masonite.authentication import Auth
-from masonite.facades import Mail
+from masonite.views import View
+
 from app.mailables.ResetPassword import ResetPassword
 
 

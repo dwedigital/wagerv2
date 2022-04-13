@@ -1,8 +1,8 @@
+from masonite.authentication import Auth
 from masonite.controllers import Controller
-from masonite.views import View
 from masonite.request import Request
 from masonite.response import Response
-from masonite.authentication import Auth
+from masonite.views import View
 
 
 class LoginController(Controller):

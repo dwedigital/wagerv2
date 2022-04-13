@@ -1,6 +1,6 @@
+from masonite.configuration import config
 from masonite.foundation import Application, Kernel
 from masonite.utils.location import base_path
-from masonite.configuration import config
 
 from Kernel import Kernel as ApplicationKernel
 

@@ -1,5 +1,6 @@
 from masonite.authentication import Auth
 from masonite.request import Request
+
 from app.models.User import User
 
 
