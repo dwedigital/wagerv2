@@ -9,7 +9,7 @@ from masonite.providers import (AuthenticationProvider, AuthorizationProvider,
                                 WhitenoiseProvider)
 from masonite.scheduling.providers import ScheduleProvider
 from masonite.validation.providers import ValidationProvider
-
+from app.providers.WagerTasks import WagerTasks
 PROVIDERS = [
     FrameworkProvider,
     HelpersProvider,
@@ -30,5 +30,6 @@ PROVIDERS = [
     AuthenticationProvider,
     ValidationProvider,
     AuthorizationProvider,
-    ORMProvider
+    ORMProvider,
+    WagerTasks,
 ]

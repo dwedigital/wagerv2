@@ -1,32 +1,35 @@
 {% extends "base.html" %}
 
 {%block head%}
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {%endblock%}
 
 {% block content %}
 @if msg
 <!-- WAGER CREATED MSG-->
-<div class="rounded-md bg-green-50 p-4" id="success-alert">
-  <div class="flex">
-    <div class="flex-shrink-0" >
-      <!-- Heroicon name: solid/check-circle -->
-      <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-      </svg>
-    </div>
-    <div class="ml-3">
-      <p class="text-sm font-medium text-green-800">{{msg}}</p>
-    </div>
-    <div class="ml-auto pl-3">
-      <div class="-mx-1.5 -my-1.5">
-        <button type="button" class="inline-flex bg-green-50 rounded-md p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600" id="close-success">
-          <span class="sr-only">Dismiss</span>
-          <!-- Heroicon name: solid/x -->
-          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg>
-        </button>
+<div x-data="{open:true}">
+  <div class="rounded-md bg-green-50 p-4" id="success-alert" x-show="open" x-transition.opactiy>
+    <div class="flex">
+      <div class="flex-shrink-0" >
+        <!-- Heroicon name: solid/check-circle -->
+        <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="ml-3">
+        <p class="text-sm font-medium text-green-800">{{msg}}</p>
+      </div>
+      <div class="ml-auto pl-3">
+        <div class="-mx-1.5 -my-1.5">
+          <button type="button" @click="open = !open" class="inline-flex bg-green-50 rounded-md p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-50 focus:ring-green-600" id="close-success">
+            <span class="sr-only">Dismiss</span>
+            <!-- Heroicon name: solid/x -->
+            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -34,13 +37,13 @@
 @endif
 
 
-<div class="flex flex-col lg:w-9/12 w-full mx-auto mt-16 md:px-0 px-8 sm:px-4">
+<div class="flex flex-col lg:w-6/12 w-full mx-auto mt-16 md:px-20 px-2">
     <!-- PAGE HEADING -->
-    <div class="md:flex md:items-center md:justify-between mb-10">
+    <div class="flex md:items-center md:justify-between mb-10">
         <div class="flex-1 min-w-0">
           <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Dashboard</h2>
         </div>
-        <div class="mt-4 flex md:mt-0 md:ml-4">
+        <div class="flex ml-4">
           <a href="{{route('wagercreate')}}"><button type="button" class="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create Wager</button></a>
         </div>
       </div>
@@ -83,10 +86,10 @@
 <!-- CHARTS -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
       <div>
-        <canvas id="statusChart" width="200px" height="200px"></canvas>
+        <canvas id="statusChart" class="h-full"></canvas>
       </div>
       <div>
-        <canvas id="rewardTypesChart" width="200px" height="200px"></canvas>
+        <canvas id="rewardTypesChart" class="h-full"></canvas>
       </div>
     </div>
     @if wagers
@@ -188,8 +191,13 @@ const myChart = new Chart(ctx, {
 
             ],
             borderWidth: 1
-        }]
+        }],
+        
     },
+    options:{
+          maintainAspectRatio: false,
+          responsive:true
+        }
 });
 const rewardData = {{analysis.reward_types() | tojson | safe}};
 const rewardChartArea = document.getElementById('rewardTypesChart');
@@ -224,14 +232,10 @@ const rewardChart = new Chart(rewardChartArea, {
                     stepSize: 1
                 }
             }
-        }
+        },
+        maintainAspectRatio:false,
+        responsive:true
     }
-});
-$(document).ready(function(){
-
-  $("#close-success").click(function(){
-      $("#success-alert").hide();
-  });
 });
 </script>
 {% endblock %}
