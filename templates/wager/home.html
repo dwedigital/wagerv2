@@ -165,7 +165,7 @@
 </div>
 
 <script>
-    const dataset = {{analysis.status() | tojson | safe}};
+    let dataset = JSON.parse('{{ analysis.status() | tojson | safe }}');
     
 
     const ctx = document.getElementById('statusChart');
@@ -199,7 +199,7 @@ const myChart = new Chart(ctx, {
           responsive:true
         }
 });
-const rewardData = {{analysis.reward_types() | tojson | safe}};
+let rewardData = JSON.parse('{{analysis.reward_types()   | tojson | safe}}');
 const rewardChartArea = document.getElementById('rewardTypesChart');
 const rewardChart = new Chart(rewardChartArea, {
     type: 'bar',

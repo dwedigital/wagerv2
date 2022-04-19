@@ -11,7 +11,7 @@ ROUTES = [
             Route.post("/create", "WagerController@store").name('store'),
             
         ], prefix="/wager", middleware=['auth'], name="wager"
-    ),Route.get('wager/accept/@token', 'WagerController@accept').name('wager.accept'),
-    Route.get('wager/decline/@token', 'WagerController@decline').name('wager.decline'),
+    ),Route.get('wager/@token/accept', 'WagerController@accept').name('wager.accept'),
+    Route.get('wager/@token/decline', 'WagerController@decline').name('wager.decline'),
     ]
 ROUTES+= Auth.routes()
