@@ -8,7 +8,7 @@
 {% block content %}
 @if msg
 <!-- WAGER CREATED MSG-->
-<div x-data="{open:true}">
+<div x-data="test()">
   <div class="rounded-md bg-green-50 p-4" id="success-alert" x-show="open" x-transition.opactiy>
     <div class="flex">
       <div class="flex-shrink-0" >
@@ -165,6 +165,16 @@
 </div>
 
 <script>
+
+// var pusher = new Pusher('cde9d411d12016a33ab2', {
+//       cluster: 'eu'
+//     });
+
+//     var channel = pusher.subscribe('my-channel');
+//     channel.bind('my-event', function(data) {
+//       console.log(JSON.stringify(data));
+//     });
+
     let dataset = JSON.parse('{{ analysis.status() | tojson | safe }}');
     
 

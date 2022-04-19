@@ -11,14 +11,17 @@ from app.models.Reward import Reward
 from app.models.User import User
 from app.models.Wager import Wager
 from app.models.WagerAnalytics import WagerAnalytics
-
+from masonite.broadcasting import Broadcast
 
 class WagerController(Controller):
-    def index(self, view: View, auth: Auth, session: Session):
+    def index(self, view: View, auth: Auth, session: Session, broadcast: Broadcast):
         user = auth.user()
         wagers = user.wagers()
         analytics = WagerAnalytics(wagers, auth.user())
         msg = session.get("success")
+
+        # Added this in to test broadcasting
+        # broadcast.channel('my-channel','my-event',{"msg": msg})
         return view.render("wager.home", {"wagers": wagers, "analysis": analytics, "msg": msg})
 
     def wager(self, view: View, request: Request, response: Response):
