@@ -26,7 +26,7 @@ class WagerController(Controller):
 
     def wager(self, view: View, request: Request, response: Response):
         wager = Wager.find(request.param("id"))
-        if wager:
+        if wager and(wager.challenger == request.user().email or wager.proposer == request.user().email or wager.referee == request.user().email):
             return view.render("wager.single", {"wager": wager})
         else:
             # TODO fix this up so it just says "wager not found"
@@ -79,11 +79,10 @@ class WagerController(Controller):
                 )
             # Email the challenger with a new challenge email
             mail.mailable(NewChallenge(wager).to(request.input("challenger"))).send()
-            session.flash("success", "Wager created successfully")
-            response.redirect("/wager") 
+            return response.redirect("/wager").with_success("Wager successfully created")
         except:
             session.flash("error", "Wager could not be created, please try again and fill in all fields")
-            response.redirect("/wager/create")
+            return response.redirect("/wager/create").with_errors("Wager creation failed").with_input()
 
     def accept(self, view: View, request: Request, response: Response):
         # TODO check wager is not rejected or accepted
