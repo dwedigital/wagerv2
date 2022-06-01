@@ -2,7 +2,7 @@
 
 
 DRIVERS = {
-    "default": "async",
+    "default": "database",
     "database": {
         "connection": "sqlite",
         "table": "jobs",

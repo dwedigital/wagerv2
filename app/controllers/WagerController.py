@@ -7,11 +7,14 @@ from masonite.response import Response
 from masonite.views import View
 from masonite.sessions import Session
 from app.mailables.NewChallenge import NewChallenge
+from app.mailables.Test import Test
 from app.models.Reward import Reward
 from app.models.User import User
 from app.models.Wager import Wager
 from app.models.WagerAnalytics import WagerAnalytics
 from masonite.broadcasting import Broadcast
+from masonite.queues import Queue
+from app.jobs.SendNewChallengeEmail import SendNewChallengeEmail
 
 class WagerController(Controller):
     def index(self, view: View, auth: Auth, session: Session, broadcast: Broadcast):
@@ -37,7 +40,7 @@ class WagerController(Controller):
         
         return view.render("wager.create", {"msg": msg})
 
-    def store(self, request: Request, response: Response, mail: Mail, session:Session):
+    def store(self, request: Request, response: Response, mail: Mail, session:Session, queue: Queue):
         # Create the wager from the form data
         try:
             wager = Wager.create(
@@ -78,7 +81,12 @@ class WagerController(Controller):
                     }
                 )
             # Email the challenger with a new challenge email
-            mail.mailable(NewChallenge(wager).to(request.input("challenger"))).send()
+            #mail.mailable(NewChallenge(wager).to(wager.challenger)).send()
+            
+            mail.mailable(Test().to("dave@dwedigital.com")).send(driver="terminal")
+            
+            queue.push(SendNewChallengeEmail(wager))
+            
             return response.redirect("/wager").with_success("Wager successfully created")
         except:
             session.flash("error", "Wager could not be created, please try again and fill in all fields")

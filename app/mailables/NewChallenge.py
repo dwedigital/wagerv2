@@ -10,6 +10,7 @@ class NewChallenge(Mailable):
         self.wager = wager
 
     def build(self):
+        print("email sent")
         return (
             self.subject("You've Been Challenged to a Wager")
             .from_(config("mail.from_address"))

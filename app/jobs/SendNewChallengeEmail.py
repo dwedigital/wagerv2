@@ -8,4 +8,5 @@ class SendNewChallengeEmail(Queueable):
         self.wager = wager
         print(self.wager.challenger)
     def handle(self):
+        print(self.wager.challenger)
         Mail.mailable(NewChallenge(self.wager).to(self.wager.challenger)).send()
