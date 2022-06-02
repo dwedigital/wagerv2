@@ -31,6 +31,8 @@
 
             <form class="mt-10" method="POST" action="{{ route('register.store') }}">
                 {{ csrf_field }}
+
+
                 <!-- Email Input -->
                 <label for="name" class="block text-xs font-semibold text-gray-600 uppercase">Name </label>
                 <input id="name" type="text" name="name" placeholder="John Doe" autocomplete="name"

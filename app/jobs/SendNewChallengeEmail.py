@@ -6,7 +6,6 @@ from masonite.facades import Mail
 class SendNewChallengeEmail(Queueable):
     def __init__(self, wager) -> None:
         self.wager = wager
-        print(self.wager.challenger)
     def handle(self):
-        print(self.wager.challenger)
+        print("CHALLENGER: ", self.wager.challenger)
         Mail.mailable(NewChallenge(self.wager).to(self.wager.challenger)).send()
