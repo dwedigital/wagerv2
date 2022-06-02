@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Wager Created</title>
+<style>
+    html {
+        background-color: #CBD5E1;
+    }
+
+    .button {
+        color: white;
+        padding-top: 7px;
+        padding-bottom: 10px;
+        background-color: #1F2937;
+        margin-top: 15px;
+    }
+
+</style>
+</head>
+<body>
+    <div style="width: 98%; background-color: white; margin-right: 10px; padding: 10px">
+        <h4>Hello, </h4>
+        <div>{{wager.name}} has expired - declare a winner</div>
+        <div>
+            <h4>Wager Details</h4>
+            <ul>
+            <li>Wager name: {{wager.name}}</li>
+            <li>Wager description: {{wager.description}}</li>
+            <li>Wager expiry: {{wager.expiry_date.strftime("%d-%m-%Y")}}</li>
+            @if wager.referee
+            <li>Wager referee: {{wager.referee}}</li>
+            @else
+            <p style="color:red">No referee was added to the wager so the outcome will be determined between you and the proposer</p>
+            @endif
+        </ul>
+        </div>
+        @if wager.reward
+        <div>
+            <h4>Reward Details</h4>
+            <ul>
+                <li>Reward type: {{wager.reward.reward_type}}</li>
+                <li>Reward description: {{wager.reward.description}}</li>
+                @if wager.reward.amount
+                <li>Reward amount: {{wager.reward.amount}}</li>
+                @endif
+            </ul>
+        </div>
+
+        @endif
+        <a href="{{ route('wager.accept', {'token': wager.token}) }}"><button class="button" style="background-color: green;">Accept Wager</button></a>
+        <a href="{{ route('wager.decline', {'token': wager.token}) }}"><button class="button" style="background-color: firebrick;">Reject Wager</button></a>
+    </div>
+    </div>
+</body>
+</html>

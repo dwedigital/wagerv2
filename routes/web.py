@@ -13,5 +13,12 @@ ROUTES = [
         ], prefix="/wager", middleware=['auth'], name="wager"
     ),Route.get('wager/@token/accept', 'WagerController@accept').name('wager.accept'),
     Route.get('wager/@token/decline', 'WagerController@decline').name('wager.decline'),
+    
+    Route.group(
+        [
+        Route.get("/", "AccountController@show").name('index'),
+    ],prefix="/account", middleware=['auth'], name="account"
+        ),
+    
     ]
 ROUTES+= Auth.routes()

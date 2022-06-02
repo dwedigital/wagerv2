@@ -81,8 +81,8 @@ class WagerController(Controller):
                 )
             # Email the challenger with a new challenge email
             #mail.mailable(NewChallenge(wager).to(wager.challenger)).send()
-            #queue.push(SendNewChallengeEmail(wager))
-            queue.push(SendTestEmail("dave@dwedigital.com"))
+            queue.push(SendNewChallengeEmail(wager))
+            #queue.push(SendTestEmail("dave@dwedigital.com"))
             return response.redirect("/wager").with_success("Wager successfully created")
         except:
             session.flash("error", "Wager could not be created, please try again and fill in all fields")
@@ -107,3 +107,6 @@ class WagerController(Controller):
         # TODO send email to proposer saying they have rejected the wager
         # TODO fix view to have some meaningful feedback
         return view.render("wager.reject")
+    
+    def outcome(self, view: View, request: Request, response: Response):
+        pass

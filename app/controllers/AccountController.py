@@ -4,4 +4,4 @@ from masonite.views import View
 
 class AccountController(Controller):
     def show(self, view: View):
-        return view.render("")
+        return view.render("account.home")
