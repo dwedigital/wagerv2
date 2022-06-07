@@ -5,6 +5,7 @@ from masoniteorm.models import Model
 
 class MessageStatus(Model):
     """MessageStatus Model"""
-    __fillable__ = ["id","status"]
+    __timestamps__ = None
+    __fillable__ = ["id","message"]
 
     pass

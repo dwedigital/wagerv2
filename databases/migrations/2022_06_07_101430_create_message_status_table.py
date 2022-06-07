@@ -10,8 +10,7 @@ class CreateMessageStatusTable(Migration):
         """
         with self.schema.create("message_statuses") as table:
             table.integer("id")
-            table.char("status", length=250)
-            table.timestamps()
+            table.char("message", length=250)
             table.primary("id")
 
     def down(self):
