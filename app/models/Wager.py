@@ -3,7 +3,7 @@ import uuid
 
 import pendulum
 from masoniteorm.models import Model
-from masoniteorm.relationships import has_one
+from masoniteorm.relationships import has_one, has_many
 
 
 class Wager(Model):
@@ -35,6 +35,12 @@ class Wager(Model):
         from app.models.Outcome import Outcome
 
         return Outcome
+    
+    @has_many("id", "wager_id")
+    def messages(self):
+        from app.models.Message import Message
+
+        return Message
 
     def get_challenger(self):
         from app.models.User import User

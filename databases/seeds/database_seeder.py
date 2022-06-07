@@ -5,6 +5,7 @@ from .outcome_table_seeder import OutcomeTableSeeder
 from .reward_table_seeder import RewardTableSeeder
 from .user_table_seeder import UserTableSeeder
 from .wager_table_seeder import WagerTableSeeder
+from .message_status_table_seeder import MessageStatusTableSeeder
 
 
 class DatabaseSeeder(Seeder):
@@ -14,3 +15,4 @@ class DatabaseSeeder(Seeder):
         self.call(WagerTableSeeder)
         self.call(RewardTableSeeder)
         self.call(OutcomeTableSeeder)
+        self.call(MessageStatusTableSeeder)
