@@ -2,7 +2,7 @@
 
 
 DRIVERS = {
-    "default": "database",
+    "default": "amqp",
     "database": {
         "connection": "sqlite",
         "table": "jobs",
@@ -14,13 +14,16 @@ DRIVERS = {
         #
     },
     "amqp": {
-        "username": "guest",
-        "password": "guest",
+        "username": "ybengqzn",
+        "password": "0NQeWSyNPWP59viUIGqUpxnr7au5DiST",
         "port": "5672",
-        "vhost": "",
-        "host": "localhost",
-        "channel": "default",
-        "queue": "masonite4",
+        "vhost": "ybengqzn",
+        "host": "rattlesnake.rmq.cloudamqp.com",
+        "channel": "",
+        "connection_options": {},
+        "exchange": "",
+        "queue": "default",
+        "tz":"UTC",
     },
     "async": {
         "blocking": False,

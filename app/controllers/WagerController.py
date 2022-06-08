@@ -1,3 +1,4 @@
+from lib2to3.pgen2 import driver
 import pendulum
 from masonite.authentication import Auth
 from masonite.controllers import Controller
@@ -81,7 +82,8 @@ class WagerController(Controller):
                 )
             # Email the challenger with a new challenge email
             #mail.mailable(NewChallenge(wager).to(wager.challenger)).send()
-            queue.push(SendNewChallengeEmail(wager))
+            queue.push(SendNewChallengeEmail(wager), queue='email')
+            print("added to queue")
             #queue.push(SendTestEmail("dave@dwedigital.com"))
             return response.redirect("/wager").with_success("Wager successfully created")
         except:
